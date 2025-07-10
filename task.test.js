@@ -55,5 +55,16 @@ describe('API de Tareas Avanzadas', () => {
     const res = await request(app).delete(`/tasks/${id}`);
     expect(res.status).toBe(200);
   });
+
+  it('debe devolver las tareas con prioridad 3', async () => {
+  const res = await request(app).get('/tasks/priority/3');
+  expect(res.status).toBe(200);
+  expect(Array.isArray(res.body)).toBe(true);
+  expect(res.body.length).toBe(2);
+  res.body.forEach(tarea => {
+    expect(tarea.priority).toBe(3);
+    });
+  });
+
 });
 
