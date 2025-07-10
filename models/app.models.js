@@ -21,6 +21,8 @@ export function crearTareas({ title, description, priority }) {
 
 // endregion 
 
+
+
 // region actualizar tareas
 export function actualizarTarea(id, datos) {
   const index = tareas.findIndex(tarea => tarea.id === id);
@@ -40,3 +42,8 @@ export function eliminarTarea(id) {
   return true;
 }
 //endregion 
+
+// region Busqueda_por_prioridad
+export function obtenerTareasPorPrioridad(level) {
+  return tareas.filter(tarea => tarea.priority === level);
+}

@@ -1,4 +1,4 @@
-import { crearTareas, obtenerTareas, actualizarTarea,eliminarTarea } from '../models/app.models.js';
+import { crearTareas, actualizarTarea,eliminarTarea,obtenerTareasPorPrioridad } from '../models/app.models.js';
 
 //region Crear Tarea
 export function crearTarea(req, res)
@@ -58,5 +58,19 @@ export function eliminarTareaControlador(req, res) {
   }
 
   return res.status(200).json({ mensaje: 'Tarea eliminada' });
+}
+//endregion
+
+//region Controlador_busqueda
+
+export function buscarPorPrioridad(req, res) {
+  const level = Number(req.params.level);
+
+  if (isNaN(level) || level < 1 || level > 5) {
+    return res.status(400).json({ error: 'Nivel de prioridad inválido. Debe estar entre 1 y 5.' });
+  }
+
+  const tareasFiltradas = obtenerTareasPorPrioridad(level);
+  return res.status(200).json(tareasFiltradas);
 }
 //endregion
